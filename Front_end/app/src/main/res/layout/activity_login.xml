@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.system.odering.front_end.LoginActivity">
+
+
+    <TextView
+        android:text="@string/login_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/lbl_login_header"
+        android:textSize="40sp"
+        android:fontFamily="monospace" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_login_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:id="@+id/tbl_login_details">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="30dp">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/txt_login_email"
+                android:hint="@string/email_login_input"
+                android:padding="20dp"
+                android:fontFamily="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/txt_login_password"
+                android:hint="@string/password_login_input"
+                android:padding="20dp"
+                android:fontFamily="monospace" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:text="@string/login_button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:id="@+id/btn_login_login"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tbl_login_details"
+        android:layout_alignStart="@+id/tbl_login_details"
+        android:fontFamily="monospace"
+        android:onClick="actionLoginLogin"/>
+
+    <Button
+        android:text="@string/register_button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_login_register"
+        android:fontFamily="monospace"
+        android:layout_alignBaseline="@+id/btn_login_login"
+        android:layout_alignBottom="@+id/btn_login_login"
+        android:layout_toRightOf="@+id/btn_login_login"
+        android:layout_toEndOf="@+id/btn_login_login"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:onClick="actionLoginRegister"/>
+</RelativeLayout>

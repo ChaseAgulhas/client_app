@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Front-end</string>
+    <string name="login_heading">Login...</string>
+    <string name="email_login_input">Email</string>
+    <string name="password_login_input">Password</string>
+    <string name="login_button_login">Login</string>
+    <string name="register_button_login">Register</string>
+    <string name="register_header">Register...</string>
+    <string name="full_name_register_input">Full name</string>
+    <string name="email_register_input">Email</string>
+    <string name="password_register_input">Password</string>
+    <string name="confirm_password_register_input">Confirm password</string>
+    <string name="register_button_register">Register</string>
+</resources>

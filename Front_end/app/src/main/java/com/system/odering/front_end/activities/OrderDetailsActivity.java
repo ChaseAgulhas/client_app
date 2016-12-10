@@ -1,26 +1,42 @@
 package com.system.odering.front_end.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.system.odering.front_end.R;
+import com.system.odering.front_end.domain.Address;
+import com.system.odering.front_end.domain.Customer;
+import com.system.odering.front_end.domain.FoodItem;
+import com.system.odering.front_end.domain.Order;
 
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
-public class OrderDetailsActivity extends Activity {
+import java.util.Collections;
+
+public class OrderDetailsActivity extends AppCompatActivity {
 
     private EditText txt_customer_name;
     private EditText txt_customer_address;
     private EditText txt_customer_email;
     private EditText txt_customer_phone;
 
+    private Long orderID;
     private String name;
-    private String address;
+    private String buildAddress;
     private String email;
     private String phoneNumber;
 
@@ -29,50 +45,106 @@ public class OrderDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        txt_customer_name = (EditText)findViewById(R.id.txt_customer_name);
-        txt_customer_address = (EditText)findViewById(R.id.txt_customer_address);
-        txt_customer_email = (EditText)findViewById(R.id.txt_customer_email);
-        txt_customer_phone = (EditText)findViewById(R.id.txt_customer_phone);
+        Bundle extras = getIntent().getExtras();
+        orderID = extras.getLong("ORDER_ID");
     }
 
     public void actionCancelOrder(View view)
     {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
     public void actionPlaceOrder(View view)
     {
-        if(txt_customer_name.getText().equals("") || txt_customer_address.getText().equals("") || txt_customer_email.getText().equals("") || txt_customer_phone.getText().equals(""))
+        if(name.equals("") || buildAddress.equals("") || email.equals("") || phoneNumber.equals(""))
         {
             Toast.makeText(this, "All fields are required to place an order.", Toast.LENGTH_LONG).show();
         }
         else
         {
+            if(isInternetConnected(getBaseContext()))
+            {
+                name = txt_customer_name.getText().toString();
+                buildAddress = txt_customer_address.getText().toString();
+                email = txt_customer_email.getText().toString();
+                phoneNumber = txt_customer_phone.getText().toString();
 
+                Customer customer = new Customer.Builder()
+                        .name(name)
+                        .email(email)
+                        .phoneNumber(phoneNumber)
+                        .build();
+                Address address = new Address.Builder()
+                        .streetName(buildAddress)
+                        .build();
+                FoodItem foodItem = new FoodItem.Builder()
+                        .name("Name test")
+                        .price(123)
+                        .build();
+
+                Order order = new Order.Builder()
+                                        .setCustomer(customer)
+                                        .setAddress(address)
+                                        .setFoodItem(foodItem)
+                                        .build();
+
+                PlaceOrderTask placeOrderTask = new PlaceOrderTask(order);
+                placeOrderTask.execute();
+            }
         }
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Integer>
+    public static boolean isInternetConnected(Context context)
     {
-        @Override
-        protected Integer doInBackground(Void... params)
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+
+        return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
+    }
+
+    private class PlaceOrderTask extends AsyncTask<Void, Void, Order>
+    {
+        private final Order order;
+
+        PlaceOrderTask(Order order)
         {
-            try
-            {
-                final String url = "http://1234:8080/api/orders";
+            this.order = order;
+        }
 
-            }
-            catch(HttpClientErrorException orderError)
-            {
-                System.out.println("Error: " + orderError);
-            }
-            catch(Exception exception)
-            {
-                System.out.println("Error: " + exception);
-            }
 
-            return 0;
+        @Override
+        protected Order doInBackground(Void... params)
+        {
+            final String url = "http://1234:8080/api/orders";
+
+            HttpHeaders headers = new HttpHeaders();
+            //headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setAccept(Collections.singletonList(new MediaType("application", "json")));
+
+            HttpEntity<Order> request = new HttpEntity<>(order, headers);
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
+
+            ResponseEntity<Order> result = restTemplate.exchange(url, HttpMethod.POST, request, Order.class);
+
+
+            //Order order = restTemplate.postForObject(url, request, Order.class);
+            //Toast.makeText(this, "Order placed successfully.", Toast.LENGTH_LONG).show();
+            System.out.println("Order placed successfully.");
+
+            return result.getBody();
+        }
+
+        @Override
+        protected void onPostExecute(final Order order)
+        {
+            runOnUiThread(new Runnable() {
+                public void run(){
+                    Toast.makeText(getBaseContext(), "Order placed successfully.", Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }

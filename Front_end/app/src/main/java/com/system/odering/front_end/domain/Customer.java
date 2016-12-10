@@ -5,13 +5,14 @@ import java.io.Serializable;
 /**
  * Created by cfebruary on 2016/09/25.
  */
-public class Customer implements Serializable, Person{
-    private String name, surname, phoneNumber;
+public class Customer implements Serializable, IPerson {
+    private String name, surname, email, phoneNumber;
 
     private Customer(Builder builder)
     {
         this.name = builder.name;
         this.surname = builder.surname;
+        this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
     }
 
@@ -25,6 +26,8 @@ public class Customer implements Serializable, Person{
         return surname;
     }
 
+    public String getEmail(){return email;}
+
     public String getPhoneNumber()
     {
         return phoneNumber;
@@ -34,6 +37,7 @@ public class Customer implements Serializable, Person{
     {
         return "Name: " + getName()
                 + "\nSurname: " + getSurname()
+                + "\nEmail: " + getEmail()
                 + "\nPhone number: " + getPhoneNumber();
     }
 
@@ -41,6 +45,7 @@ public class Customer implements Serializable, Person{
     {
         private String name;
         private String surname;
+        private String email;
         private String phoneNumber;
 
         public Builder(){}
@@ -57,6 +62,12 @@ public class Customer implements Serializable, Person{
             return this;
         }
 
+        public Builder email(String email)
+        {
+            this.email = email;
+            return this;
+        }
+
         public Builder phoneNumber(String phoneNumber)
         {
             this.phoneNumber = phoneNumber;
@@ -67,6 +78,7 @@ public class Customer implements Serializable, Person{
         {
             this.name = customer.name;
             this.surname = customer.surname;
+            this.email = customer.email;
             this.phoneNumber = customer.phoneNumber;
             return this;
         }

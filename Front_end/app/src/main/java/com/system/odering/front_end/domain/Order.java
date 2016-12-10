@@ -45,25 +45,25 @@ public class Order implements Serializable, IOrder{
         private Address address;
         private FoodItem foodItem;
 
-        public Builder setOrderID(int value)
+        public Builder orderID(int value)
         {
             this.orderID = value;
             return this;
         }
 
-        public Builder setCustomer(Customer value)
+        public Builder customer(Customer value)
         {
             this.customer = value;
             return this;
         }
 
-        public Builder setAddress(Address value)
+        public Builder address(Address value)
         {
             this.address = value;
             return this;
         }
 
-        public Builder setFoodItem(FoodItem value)
+        public Builder foodItem(FoodItem value)
         {
             this.foodItem = value;
             return this;

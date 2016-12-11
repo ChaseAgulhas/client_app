@@ -56,7 +56,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void actionLoginRegister(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        /*Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);*/
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 

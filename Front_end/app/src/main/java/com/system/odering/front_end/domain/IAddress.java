@@ -9,4 +9,5 @@ public interface IAddress {
     String getSuburb();
     String getCity();
     String getPostCode();
+    String toString();
 }

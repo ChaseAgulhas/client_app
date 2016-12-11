@@ -6,5 +6,6 @@ package com.system.odering.front_end.domain;
 public interface IPerson {
     String getName();
     String getSurname();
+    String getEmail();
     String getPhoneNumber();
 }

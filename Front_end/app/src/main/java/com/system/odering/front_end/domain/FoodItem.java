@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by cfebruary on 2016/09/25.
  */
-public class FoodItem implements Serializable{
+public class FoodItem implements Serializable, IProduct{
     private String name;
     private double price;
     private int amountAvailable;

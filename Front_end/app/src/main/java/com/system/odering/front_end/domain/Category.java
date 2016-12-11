@@ -3,7 +3,7 @@ package com.system.odering.front_end.domain;
 /**
  * Created by cfebruary on 2016/10/10.
  */
-public class Category {
+public class Category implements ICategory{
 
     private String categoryID;
     private String categoryName;
@@ -14,7 +14,7 @@ public class Category {
         this.categoryName = builder.categoryName;
     }
 
-    public String getCategoryIDID()
+    public String getCategoryID()
     {
         return categoryID;
     }

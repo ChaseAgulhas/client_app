@@ -84,9 +84,9 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         .build();
 
                 Order order = new Order.Builder()
-                                        .setCustomer(customer)
-                                        .setAddress(address)
-                                        .setFoodItem(foodItem)
+                                        .customer(customer)
+                                        .address(address)
+                                        .foodItem(foodItem)
                                         .build();
 
                 PlaceOrderTask placeOrderTask = new PlaceOrderTask(order);

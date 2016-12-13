@@ -1,4 +1,7 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.order;
+
+import com.system.odering.front_end.domain.address.Address;
+import com.system.odering.front_end.domain.user.Customer;
 
 import java.io.Serializable;
 

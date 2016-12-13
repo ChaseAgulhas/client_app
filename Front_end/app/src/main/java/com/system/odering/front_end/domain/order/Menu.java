@@ -1,4 +1,4 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.order;
 
 import java.io.Serializable;
 import java.util.HashMap;

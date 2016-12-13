@@ -2,6 +2,9 @@ package com.system.odering.front_end.domain;
 
 import android.test.AndroidTestCase;
 
+import com.system.odering.front_end.domain.order.FoodItem;
+import com.system.odering.front_end.domain.order.IProduct;
+
 import junit.framework.Assert;
 
 /**

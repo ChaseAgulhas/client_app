@@ -1,4 +1,4 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.user;
 
 import java.io.Serializable;
 

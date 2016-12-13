@@ -1,6 +1,6 @@
-package com.system.odering.front_end.factories;
+package com.system.odering.front_end.factories.order;
 
-import com.system.odering.front_end.domain.FoodItem;
+import com.system.odering.front_end.domain.order.FoodItem;
 
 /**
  * Created by cfebruary on 2016/09/25.

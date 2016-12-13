@@ -1,6 +1,6 @@
-package com.system.odering.front_end.factories;
+package com.system.odering.front_end.factories.user;
 
-import com.system.odering.front_end.domain.Customer;
+import com.system.odering.front_end.domain.user.Customer;
 
 /**
  * Created by cfebruary on 2016/12/10.

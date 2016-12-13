@@ -1,4 +1,4 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.user;
 
 /**
  * Created by cfebruary on 2016/09/29.

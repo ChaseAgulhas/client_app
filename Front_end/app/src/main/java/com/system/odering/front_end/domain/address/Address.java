@@ -1,4 +1,4 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.address;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Address implements Serializable, IAddress{
 
+    private Long id;
     private String streetNumber;
     private String streetName;
     private String suburb;
@@ -15,12 +16,15 @@ public class Address implements Serializable, IAddress{
 
     private Address(Builder builder)
     {
+        this.id = builder.id;
         this.streetNumber = builder.streetNumber;
         this.streetName = builder.streetName;
         this.suburb = builder.suburb;
         this.city = builder.city;
         this.postCode = builder.postCode;
     }
+
+    public Long getId(){return id;}
 
     public String getStreetNumber() {
         return streetNumber;
@@ -53,6 +57,7 @@ public class Address implements Serializable, IAddress{
 
     public static class Builder
     {
+        private Long id;
         private String streetNumber;
         private String streetName;
         private String suburb;
@@ -60,6 +65,11 @@ public class Address implements Serializable, IAddress{
         private String postCode;
 
         public Builder(){}
+
+        public Builder id(Long id){
+            this.id = id;
+            return this;
+        }
 
         public Builder streetNumber(String streetNumber)
         {
@@ -93,6 +103,7 @@ public class Address implements Serializable, IAddress{
 
         public Builder copy(Address address)
         {
+            this.id = address.getId();
             this.streetNumber = address.getStreetNumber();
             this.streetName = address.getStreetName();
             this.suburb = address.getSuburb();

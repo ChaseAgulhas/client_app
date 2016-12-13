@@ -1,9 +1,11 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.user;
+
+import java.io.Serializable;
 
 /**
  * Created by cfebruary on 2016/09/29.
  */
-public class Login {
+public class Login implements Serializable, ILogin{
     private String username;
     private String password;
 

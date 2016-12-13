@@ -6,15 +6,19 @@ import java.io.Serializable;
  * Created by cfebruary on 2016/09/25.
  */
 public class Customer implements Serializable, IPerson {
+    private Long customerId;
     private String name, surname, email, phoneNumber;
 
     private Customer(Builder builder)
     {
+        this.customerId = builder.customerId;
         this.name = builder.name;
         this.surname = builder.surname;
         this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
     }
+
+    public Long getCustomerId(){return customerId;}
 
     public String getName()
     {
@@ -43,6 +47,7 @@ public class Customer implements Serializable, IPerson {
 
     public static class Builder
     {
+        private Long customerId;
         private String name;
         private String surname;
         private String email;
@@ -50,6 +55,11 @@ public class Customer implements Serializable, IPerson {
 
         public Builder(){}
 
+        public Builder customerId(Long customerId)
+        {
+            this.customerId = customerId;
+            return this;
+        }
         public Builder name(String name)
         {
             this.name = name;
@@ -76,6 +86,7 @@ public class Customer implements Serializable, IPerson {
 
         public Builder copy(Customer customer)
         {
+            this.customerId = customer.customerId;
             this.name = customer.name;
             this.surname = customer.surname;
             this.email = customer.email;

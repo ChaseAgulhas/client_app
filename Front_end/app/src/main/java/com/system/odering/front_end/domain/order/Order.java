@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Order implements Serializable, IOrder{
 
-    private int orderID;
+    private Long orderID;
     private Customer customer;
     private Address address;
     private FoodItem foodItem;
@@ -23,7 +23,7 @@ public class Order implements Serializable, IOrder{
         this.foodItem = builder.foodItem;
     }
 
-    public int getOrderID(){return orderID;}
+    public Long getOrderID(){return orderID;}
 
     public Customer getCustomer() {return customer;}
 
@@ -43,12 +43,12 @@ public class Order implements Serializable, IOrder{
 
     public static class Builder
     {
-        private int orderID;
+        private Long orderID;
         private Customer customer;
         private Address address;
         private FoodItem foodItem;
 
-        public Builder orderID(int value)
+        public Builder orderID(Long value)
         {
             this.orderID = value;
             return this;
@@ -72,7 +72,7 @@ public class Order implements Serializable, IOrder{
             return this;
         }
 
-        public Builder copy(int orderID, Order value)
+        public Builder copy(Long orderID, Order value)
         {
             this.orderID = orderID;
             this.customer = value.customer;

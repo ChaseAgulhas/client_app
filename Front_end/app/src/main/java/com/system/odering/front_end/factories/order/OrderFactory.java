@@ -9,7 +9,7 @@ import com.system.odering.front_end.domain.order.Order;
  * Created by cfebruary on 2016/12/10.
  */
 public class OrderFactory {
-    public static Order getInstance(int orderID, Customer customer, Address address, FoodItem foodItem)
+    public static Order getInstance(Long orderID, Customer customer, Address address, FoodItem foodItem)
     {
         Order order = new Order.Builder()
                 .orderID(orderID)

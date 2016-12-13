@@ -1,11 +1,13 @@
 package com.system.odering.front_end.domain.order;
 
+import java.io.Serializable;
+
 /**
  * Created by cfebruary on 2016/10/10.
  */
-public class Category implements ICategory{
+public class Category implements Serializable, ICategory{
 
-    private String categoryID;
+    private Long categoryID;
     private String categoryName;
 
     public Category(Builder builder)
@@ -14,7 +16,7 @@ public class Category implements ICategory{
         this.categoryName = builder.categoryName;
     }
 
-    public String getCategoryID()
+    public Long getCategoryID()
     {
         return categoryID;
     }
@@ -31,12 +33,12 @@ public class Category implements ICategory{
 
     public static class Builder
     {
-        private String categoryID;
+        private Long categoryID;
         private String categoryName;
 
         public Builder(){}
 
-        public Builder categoryID(String categoryID)
+        public Builder categoryID(Long categoryID)
         {
             this.categoryID = categoryID;
             return this;

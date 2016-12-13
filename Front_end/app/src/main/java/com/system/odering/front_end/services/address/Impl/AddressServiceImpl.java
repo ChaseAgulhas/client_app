@@ -39,11 +39,11 @@ public class AddressServiceImpl extends IntentService implements IAddressService
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_ADD.equals(action)) {
-                final Address Address = (Address)intent.getSerializableExtra(EXTRA_ADD);
-                saveAddress(Address);
+                final Address address = (Address)intent.getSerializableExtra(EXTRA_ADD);
+                saveAddress(address);
             } else if (ACTION_UPDATE.equals(action)) {
-                final Address Address = (Address)intent.getSerializableExtra(EXTRA_UPDATE);
-                updateAddress(Address);
+                final Address address = (Address)intent.getSerializableExtra(EXTRA_UPDATE);
+                updateAddress(address);
             }
         }
     }

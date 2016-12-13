@@ -6,7 +6,7 @@ import com.system.odering.front_end.domain.order.Category;
  * Created by cfebruary on 2016/12/10.
  */
 public class CategoryFactory {
-    public static Category getInstance(String categoryID, String categoryName)
+    public static Category getInstance(Long categoryID, String categoryName)
     {
         Category category = new Category.Builder()
                 .categoryID(categoryID)

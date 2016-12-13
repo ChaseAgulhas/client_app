@@ -6,16 +6,20 @@ import java.io.Serializable;
  * Created by cfebruary on 2016/09/25.
  */
 public class FoodItem implements Serializable, IProduct{
+    private Long id;
     private String name;
     private double price;
     private int amountAvailable;
 
     private FoodItem(Builder builder)
     {
+        this.id = builder.id;
         this.name = builder.name;
         this.price = builder.price;
         this.amountAvailable = builder.amountAvailable;
     }
+
+    public Long getId(){return id;}
 
     public String getName() {
         return name;
@@ -38,11 +42,17 @@ public class FoodItem implements Serializable, IProduct{
 
     public static class Builder
     {
+        private Long id;
         private String name;
         private double price;
         private int amountAvailable;
 
         public Builder(){}
+
+        public Builder id(Long id){
+            this.id = id;
+            return this;
+        }
 
         public Builder name(String name)
         {
@@ -64,6 +74,7 @@ public class FoodItem implements Serializable, IProduct{
 
         public Builder copy(FoodItem foodItem)
         {
+            this.id = foodItem.id;
             this.name = foodItem.name;
             this.price = foodItem.price;
             this.amountAvailable = foodItem.amountAvailable;

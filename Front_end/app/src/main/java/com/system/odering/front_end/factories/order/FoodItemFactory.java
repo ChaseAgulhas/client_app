@@ -7,9 +7,10 @@ import com.system.odering.front_end.domain.order.FoodItem;
  */
 public class FoodItemFactory {
 
-    public static FoodItem getInstance(String name, double price, int amountAvailable)
+    public static FoodItem getInstance(Long id, String name, double price, int amountAvailable)
     {
         FoodItem foodItem = new FoodItem.Builder()
+                .id(id)
                 .name(name)
                 .price(price)
                 .amountAvailable(amountAvailable)

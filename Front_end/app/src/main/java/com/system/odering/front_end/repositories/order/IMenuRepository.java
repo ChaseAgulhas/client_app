@@ -1,6 +1,6 @@
 package com.system.odering.front_end.repositories.order;
 
-import com.system.odering.front_end.domain.order.Menu;
+import com.system.odering.front_end.domain.order.Impl.Menu;
 import com.system.odering.front_end.repositories.IRepository;
 
 /**

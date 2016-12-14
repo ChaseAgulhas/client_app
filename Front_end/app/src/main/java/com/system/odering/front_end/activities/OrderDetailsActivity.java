@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.system.odering.front_end.R;
-import com.system.odering.front_end.domain.address.Address;
-import com.system.odering.front_end.domain.user.Customer;
-import com.system.odering.front_end.domain.order.FoodItem;
-import com.system.odering.front_end.domain.order.Order;
+import com.system.odering.front_end.domain.address.Impl.Address;
+import com.system.odering.front_end.domain.user.Impl.Customer;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.Order;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

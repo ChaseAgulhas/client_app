@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 import com.system.odering.front_end.repositories.user.ICustomerRepository;
 import com.system.odering.front_end.repositories.user.Impl.CustomerRepositoryImpl;
 import com.system.odering.front_end.services.user.ICustomerService;

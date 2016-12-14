@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.system.odering.front_end.domain.order.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
 import com.system.odering.front_end.repositories.order.IFoodItemRepository;
 import com.system.odering.front_end.repositories.order.Impl.FoodItemRepositoryImpl;
 import com.system.odering.front_end.services.order.IFoodItemService;

@@ -1,4 +1,6 @@
-package com.system.odering.front_end.domain.user;
+package com.system.odering.front_end.domain.user.Impl;
+
+import com.system.odering.front_end.domain.user.IPerson;
 
 import java.io.Serializable;
 

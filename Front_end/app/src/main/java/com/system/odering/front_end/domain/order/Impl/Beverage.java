@@ -1,17 +1,19 @@
-package com.system.odering.front_end.domain.order;
+package com.system.odering.front_end.domain.order.Impl;
+
+import com.system.odering.front_end.domain.order.IProduct;
 
 import java.io.Serializable;
 
 /**
- * Created by cfebruary on 2016/09/25.
+ * Created by cfebruary on 2016/12/14.
  */
-public class FoodItem implements Serializable, IProduct{
+public class Beverage implements Serializable,IProduct {
     private Long id;
     private String name;
     private double price;
     private int amountAvailable;
 
-    private FoodItem(Builder builder)
+    private Beverage(Builder builder)
     {
         this.id = builder.id;
         this.name = builder.name;
@@ -72,16 +74,17 @@ public class FoodItem implements Serializable, IProduct{
             return this;
         }
 
-        public Builder copy(FoodItem foodItem)
+        public Builder copy(Beverage beverage)
         {
-            this.id = foodItem.id;
-            this.name = foodItem.name;
-            this.price = foodItem.price;
-            this.amountAvailable = foodItem.amountAvailable;
+            this.id = beverage.id;
+            this.name = beverage.name;
+            this.price = beverage.price;
+            this.amountAvailable = beverage.amountAvailable;
 
             return this;
         }
 
-        public FoodItem build(){return new FoodItem(this);}
+        public Beverage build(){return new Beverage(this);}
     }
 }
+

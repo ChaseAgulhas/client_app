@@ -1,11 +1,13 @@
-package com.system.odering.front_end.domain.order;
+package com.system.odering.front_end.domain.order.Impl;
+
+import com.system.odering.front_end.domain.order.ICategory;
 
 import java.io.Serializable;
 
 /**
  * Created by cfebruary on 2016/10/10.
  */
-public class Category implements Serializable, ICategory{
+public class Category implements Serializable, ICategory {
 
     private Long categoryID;
     private String categoryName;

@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.system.odering.front_end.domain.address.Address;
+import com.system.odering.front_end.domain.address.Impl.Address;
 import com.system.odering.front_end.repositories.address.IAddressRepository;
 import com.system.odering.front_end.repositories.address.Impl.AddressRepositoryImpl;
 import com.system.odering.front_end.services.address.IAddressService;

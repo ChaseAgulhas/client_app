@@ -5,7 +5,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.system.odering.front_end.domain.order.Category;
+import com.system.odering.front_end.domain.order.Impl.Category;
 import com.system.odering.front_end.repositories.order.ICategoryRepository;
 import com.system.odering.front_end.repositories.order.Impl.CategoryRepositoryImpl;
 import com.system.odering.front_end.services.order.ICategoryService;

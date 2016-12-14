@@ -3,7 +3,7 @@ package com.system.odering.front_end.services.order;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
-import com.system.odering.front_end.domain.order.Category;
+import com.system.odering.front_end.domain.order.Impl.Category;
 import com.system.odering.front_end.repositories.order.ICategoryRepository;
 import com.system.odering.front_end.repositories.order.Impl.CategoryRepositoryImpl;
 import com.system.odering.front_end.services.order.Impl.CategoryServiceImpl;

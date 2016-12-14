@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.system.odering.front_end.domain.address.Address;
-import com.system.odering.front_end.domain.order.FoodItem;
-import com.system.odering.front_end.domain.order.Order;
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.address.Impl.Address;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.Order;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 import com.system.odering.front_end.factories.order.OrderFactory;
 import com.system.odering.front_end.repositories.order.IOrderRepository;
 import com.system.odering.front_end.utils.database.DBConstants;

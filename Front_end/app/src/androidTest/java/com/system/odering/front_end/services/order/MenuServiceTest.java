@@ -3,9 +3,9 @@ package com.system.odering.front_end.services.order;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
-import com.system.odering.front_end.domain.order.Category;
-import com.system.odering.front_end.domain.order.FoodItem;
-import com.system.odering.front_end.domain.order.Menu;
+import com.system.odering.front_end.domain.order.Impl.Category;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.Menu;
 import com.system.odering.front_end.factories.order.CategoryFactory;
 import com.system.odering.front_end.factories.order.FoodItemFactory;
 import com.system.odering.front_end.repositories.order.IMenuRepository;

@@ -3,7 +3,7 @@ package com.system.odering.front_end.repositories.order;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
-import com.system.odering.front_end.domain.order.Order;
+import com.system.odering.front_end.domain.order.Impl.Order;
 import com.system.odering.front_end.repositories.order.Impl.OrderRepositoryImpl;
 
 import junit.framework.Assert;

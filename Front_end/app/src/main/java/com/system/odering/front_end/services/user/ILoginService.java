@@ -2,7 +2,7 @@ package com.system.odering.front_end.services.user;
 
 import android.content.Context;
 
-import com.system.odering.front_end.domain.user.Login;
+import com.system.odering.front_end.domain.user.Impl.Login;
 
 /**
  * Created by cfebruary on 2016/12/14.

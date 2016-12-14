@@ -1,6 +1,6 @@
 package com.system.odering.front_end.factories.address;
 
-import com.system.odering.front_end.domain.address.Address;
+import com.system.odering.front_end.domain.address.Impl.Address;
 
 /**
  * Created by cfebruary on 2016/12/10.

@@ -1,6 +1,6 @@
 package com.system.odering.front_end.repositories.user;
 
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 import com.system.odering.front_end.repositories.IRepository;
 
 /**

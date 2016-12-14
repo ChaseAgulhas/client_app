@@ -2,7 +2,7 @@ package com.system.odering.front_end.services.order;
 
 import android.content.Context;
 
-import com.system.odering.front_end.domain.order.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
 
 /**
  * Created by cfebruary on 2016/12/14.

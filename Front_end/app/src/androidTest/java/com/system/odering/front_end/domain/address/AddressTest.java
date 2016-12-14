@@ -2,6 +2,8 @@ package com.system.odering.front_end.domain.address;
 
 import android.test.AndroidTestCase;
 
+import com.system.odering.front_end.domain.address.Impl.Address;
+
 import junit.framework.Assert;
 
 /**

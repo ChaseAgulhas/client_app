@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.system.odering.front_end.domain.order.Menu;
+import com.system.odering.front_end.domain.order.Impl.Menu;
 import com.system.odering.front_end.repositories.order.IMenuRepository;
 import com.system.odering.front_end.repositories.order.Impl.MenuRepositoryImpl;
 import com.system.odering.front_end.services.order.IMenuService;

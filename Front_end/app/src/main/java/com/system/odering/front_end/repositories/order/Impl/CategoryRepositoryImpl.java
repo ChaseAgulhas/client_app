@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.system.odering.front_end.domain.order.Category;
+import com.system.odering.front_end.domain.order.Impl.Category;
 import com.system.odering.front_end.factories.order.CategoryFactory;
 import com.system.odering.front_end.repositories.order.ICategoryRepository;
 import com.system.odering.front_end.utils.database.DBConstants;

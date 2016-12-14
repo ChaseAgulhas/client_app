@@ -3,7 +3,7 @@ package com.system.odering.front_end.services.user;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 import com.system.odering.front_end.repositories.user.ICustomerRepository;
 import com.system.odering.front_end.repositories.user.Impl.CustomerRepositoryImpl;
 import com.system.odering.front_end.services.user.Impl.CustomerServiceImpl;

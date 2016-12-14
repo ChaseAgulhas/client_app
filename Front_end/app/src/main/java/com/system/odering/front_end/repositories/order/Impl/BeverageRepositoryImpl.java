@@ -8,35 +8,35 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.system.odering.front_end.domain.order.Impl.Category;
-import com.system.odering.front_end.domain.order.Impl.FoodItem;
-import com.system.odering.front_end.domain.order.Impl.Menu;
-import com.system.odering.front_end.factories.order.MenuFactory;
-import com.system.odering.front_end.repositories.order.IMenuRepository;
+import com.system.odering.front_end.domain.order.Impl.Beverage;
+import com.system.odering.front_end.factories.order.BeverageFactory;
+import com.system.odering.front_end.repositories.order.IBeverageRepository;
 import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by cfebruary on 2016/12/13.
+ * Created by cfebruary on 2016/12/14.
  */
-public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuRepository {
-    public static final String TABLE_NAME = "menu";
+public class BeverageRepositoryImpl extends SQLiteOpenHelper implements IBeverageRepository {
+    public static final String TABLE_NAME = "beverage";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "ID";
-    public static final String COLUMN_CATEGORYNAME = "CATEGORYNAME";
-    public static final String COLUMN_FOODNAME = "FOODNAME";
+    public static final String COLUMN_NAME = "NAME";
+    public static final String COLUMN_PRICE = "PRICE";
+    public static final String COLUMN_AMOUNTAVAILABLE = "AMOUNTAVAILABLE";
 
     //Database table creation
     private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + COLUMN_CATEGORYNAME + " TEXT NOT NULL,"
-            + COLUMN_FOODNAME + " TEXT NOT NULL);";
+            + COLUMN_NAME + " TEXT NOT NULL,"
+            + COLUMN_PRICE + " TEXT NOT NULL,"
+            + COLUMN_AMOUNTAVAILABLE + " TEXT NOT NULL);";
 
-    public MenuRepositoryImpl(Context context)
+    public BeverageRepositoryImpl(Context context)
     {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
     }
@@ -47,14 +47,15 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
     }
 
     @Override
-    public Menu findById(Long id){
+    public Beverage findById(Long id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_CATEGORYNAME,
-                        COLUMN_FOODNAME},
+                        COLUMN_NAME,
+                        COLUMN_PRICE,
+                        COLUMN_AMOUNTAVAILABLE},
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -62,53 +63,49 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
                 null);
         if(cursor.moveToFirst())
         {
-            Long menuId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
-            String categoryName = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORYNAME));
-            String foodName = cursor.getString(cursor.getColumnIndex(COLUMN_FOODNAME));
+            Long beverageId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
+            String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+            double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
+            int amountAvailable = cursor.getInt(cursor.getColumnIndex(COLUMN_AMOUNTAVAILABLE));
 
-            Category category = new Category.Builder()
-                    .categoryName(categoryName)
-                    .build();
-            FoodItem foodItem = new FoodItem.Builder()
-                    .name(foodName)
-                    .build();
+            final Beverage beverage = BeverageFactory.getInstance(beverageId, name, price, amountAvailable);
 
-            final Menu menu = MenuFactory.getInstance(menuId, category, foodItem);
-
-            return menu;
+            return beverage;
         }
         else
             return null;
     }
 
     @Override
-    public Menu save(Menu menu) {
+    public Beverage save(Beverage beverage) {
         open();
         ContentValues values = new ContentValues();
 
-        values.put(COLUMN_ID, menu.getId());
-        values.put(COLUMN_CATEGORYNAME, menu.getCategory().getCategoryName());
-        values.put(COLUMN_FOODNAME, menu.getFoodItem().getName());
+        values.put(COLUMN_ID, beverage.getId());
+        values.put(COLUMN_NAME, beverage.getName());
+        values.put(COLUMN_PRICE, beverage.getPrice());
+        values.put(COLUMN_AMOUNTAVAILABLE, beverage.getAmountAvailable());
 
         Long id = db.insertOrThrow(TABLE_NAME, null,values);
 
-        Menu newMenu = new Menu.Builder()
-                .copy(menu.getId(), menu.getCategory(), menu.getFoodItem())
+        Beverage newBeverage = new Beverage.Builder()
+                .copy(beverage)
                 .id(new Long(id))
                 .build();
 
-        return newMenu;
+        return newBeverage;
     }
 
     @Override
-    public Menu update(Menu entity) {
+    public Beverage update(Beverage entity) {
         open();
 
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_CATEGORYNAME, entity.getCategory().getCategoryName());
-        values.put(COLUMN_FOODNAME, entity.getFoodItem().getName());
+        values.put(COLUMN_NAME, entity.getName());
+        values.put(COLUMN_PRICE, entity.getPrice());
+        values.put(COLUMN_AMOUNTAVAILABLE, entity.getAmountAvailable());
 
         db.update(
                 TABLE_NAME,
@@ -120,7 +117,7 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
     }
 
     @Override
-    public Menu delete(Menu entity) {
+    public Beverage delete(Beverage entity) {
         open();
         db.delete(
                 TABLE_NAME,
@@ -130,30 +127,25 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
     }
 
     @Override
-    public Set<Menu> findAll() {
+    public Set<Beverage> findAll() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Set<Menu> menuSet = new HashSet<>();
+        Set<Beverage> beverageSet = new HashSet<>();
         open();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                Long columnId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
-                String categoryName = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORYNAME));
-                String foodName = cursor.getString(cursor.getColumnIndex(COLUMN_FOODNAME));
+                Long id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
+                int amountAvailable = cursor.getInt(cursor.getColumnIndex(COLUMN_AMOUNTAVAILABLE));
 
-                Category category = new Category.Builder()
-                        .categoryName(categoryName)
-                        .build();
-                FoodItem foodItem = new FoodItem.Builder()
-                        .name(foodName)
-                        .build();
-                final Menu menu = MenuFactory.getInstance(columnId, category, foodItem);
+                final Beverage beverage = BeverageFactory.getInstance(id, name, price, amountAvailable);
 
-                menuSet.add(menu);
+                beverageSet.add(beverage);
             }
             while (cursor.moveToNext());
         }
-        return menuSet;
+        return beverageSet;
     }
 
     @Override

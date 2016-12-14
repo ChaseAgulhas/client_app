@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.system.odering.front_end.domain.address.Address;
+import com.system.odering.front_end.domain.address.Impl.Address;
 import com.system.odering.front_end.factories.address.AddressFactory;
 import com.system.odering.front_end.repositories.address.IAddressRepository;
 import com.system.odering.front_end.utils.database.DBConstants;

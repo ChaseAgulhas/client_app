@@ -1,4 +1,6 @@
-package com.system.odering.front_end.domain.order;
+package com.system.odering.front_end.domain.order.Impl;
+
+import com.system.odering.front_end.domain.order.IMenu;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.Map;
 /**
  * Created by cfebruary on 2016/09/25.
  */
-public class Menu implements Serializable, IMenu{
+public class Menu implements Serializable, IMenu {
     private Long id;
     private Category category;
     private FoodItem foodItem;

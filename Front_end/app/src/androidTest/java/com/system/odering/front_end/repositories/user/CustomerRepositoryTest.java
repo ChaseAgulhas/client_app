@@ -3,7 +3,7 @@ package com.system.odering.front_end.repositories.user;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 import com.system.odering.front_end.repositories.user.Impl.CustomerRepositoryImpl;
 
 import junit.framework.Assert;

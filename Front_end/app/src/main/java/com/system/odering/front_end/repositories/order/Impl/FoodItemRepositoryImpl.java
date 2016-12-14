@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.system.odering.front_end.domain.order.FoodItem;
+import com.system.odering.front_end.domain.order.Impl.FoodItem;
 import com.system.odering.front_end.factories.order.FoodItemFactory;
 import com.system.odering.front_end.repositories.order.IFoodItemRepository;
 import com.system.odering.front_end.utils.database.DBConstants;

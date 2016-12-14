@@ -1,9 +1,6 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.order;
 
 import android.test.AndroidTestCase;
-
-import com.system.odering.front_end.domain.order.Category;
-import com.system.odering.front_end.domain.order.ICategory;
 
 import junit.framework.Assert;
 

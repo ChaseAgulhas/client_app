@@ -1,9 +1,6 @@
-package com.system.odering.front_end.domain;
+package com.system.odering.front_end.domain.user;
 
 import android.test.AndroidTestCase;
-
-import com.system.odering.front_end.domain.user.Customer;
-import com.system.odering.front_end.domain.user.IPerson;
 
 import junit.framework.Assert;
 

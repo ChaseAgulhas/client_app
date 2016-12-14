@@ -11,7 +11,7 @@ import android.util.Log;
 import com.system.odering.front_end.domain.user.Login;
 import com.system.odering.front_end.factories.user.LoginFactory;
 import com.system.odering.front_end.repositories.user.ILoginRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,13 @@ public class LoginRepositoryImpl extends SQLiteOpenHelper implements ILoginRepos
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_USERNAME = "USERNAME";
     public static final String COLUMN_PASSWORD = "PASSWORD";
+
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_NAME + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_USERNAME + " TEXT NOT NULL,"
+            + COLUMN_PASSWORD + " TEXT NOT NULL);";
 
     public LoginRepositoryImpl(Context context)
     {
@@ -143,7 +150,7 @@ public class LoginRepositoryImpl extends SQLiteOpenHelper implements ILoginRepos
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.system.odering.front_end.utils;
+package com.system.odering.front_end.utils.database;
 
 /**
  * Created by cfebruary on 2016/12/13.

@@ -11,7 +11,7 @@ import android.util.Log;
 import com.system.odering.front_end.domain.order.FoodItem;
 import com.system.odering.front_end.factories.order.FoodItemFactory;
 import com.system.odering.front_end.repositories.order.IFoodItemRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +27,14 @@ public class FoodItemRepositoryImpl extends SQLiteOpenHelper implements IFoodIte
     public static final String COLUMN_NAME = "NAME";
     public static final String COLUMN_PRICE = "PRICE";
     public static final String COLUMN_AMOUNTAVAILABLE = "AMOUNTAVAILABLE";
+
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_NAME + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_NAME + " TEXT NOT NULL,"
+            + COLUMN_PRICE + " TEXT NOT NULL,"
+            + COLUMN_AMOUNTAVAILABLE + " TEXT NOT NULL);";
 
     public FoodItemRepositoryImpl(Context context)
     {
@@ -149,7 +157,7 @@ public class FoodItemRepositoryImpl extends SQLiteOpenHelper implements IFoodIte
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override

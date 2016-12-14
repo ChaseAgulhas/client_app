@@ -11,7 +11,7 @@ import android.util.Log;
 import com.system.odering.front_end.domain.order.Category;
 import com.system.odering.front_end.factories.order.CategoryFactory;
 import com.system.odering.front_end.repositories.order.ICategoryRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,12 +20,18 @@ import java.util.Set;
  * Created by cfebruary on 2016/12/13.
  */
 public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategoryRepository {
-    public static final String TABLE_NAME = "category";
+    public static final String TABLE_CATEGORY = "category";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_CATEGORYNAME = "CATEGORYNAME";
 
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_CATEGORY + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_CATEGORYNAME + " TEXT NOT NULL);";
+            
     public CategoryRepositoryImpl(Context context)
     {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
@@ -39,7 +45,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
     public Category findById(Long id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
-                TABLE_NAME,
+                TABLE_CATEGORY,
                 new String[]{
                         COLUMN_ID,
                         COLUMN_CATEGORYNAME},
@@ -69,7 +75,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
         values.put(COLUMN_ID, category.getCategoryID());
         values.put(COLUMN_CATEGORYNAME, category.getCategoryName());
 
-        Long id = db.insertOrThrow(TABLE_NAME, null,values);
+        Long id = db.insertOrThrow(TABLE_CATEGORY, null,values);
 
         Category newCategory = new Category.Builder()
                 .copy(category)
@@ -89,7 +95,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
         values.put(COLUMN_CATEGORYNAME, entity.getCategoryName());
 
         db.update(
-                TABLE_NAME,
+                TABLE_CATEGORY,
                 values,
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf((entity.getCategoryID()))}
@@ -101,7 +107,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
     public Category delete(Category entity) {
         open();
         db.delete(
-                TABLE_NAME,
+                TABLE_CATEGORY,
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(entity.getCategoryID())});
         return entity;
@@ -112,7 +118,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
         SQLiteDatabase db = this.getReadableDatabase();
         Set<Category> categorySet = new HashSet<>();
         open();
-        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CATEGORY, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 Long columnId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
@@ -130,14 +136,14 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
     @Override
     public int deleteAll() {
         open();
-        int rowsDeleted = db.delete(TABLE_NAME,null,null);
+        int rowsDeleted = db.delete(TABLE_CATEGORY,null,null);
         //close();
         return rowsDeleted;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override
@@ -145,7 +151,7 @@ public class CategoryRepositoryImpl extends SQLiteOpenHelper implements ICategor
         Log.w(this.getClass().getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
         onCreate(db);
     }
 }

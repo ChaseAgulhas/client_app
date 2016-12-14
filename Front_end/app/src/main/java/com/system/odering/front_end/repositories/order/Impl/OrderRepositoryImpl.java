@@ -14,7 +14,7 @@ import com.system.odering.front_end.domain.order.Order;
 import com.system.odering.front_end.domain.user.Customer;
 import com.system.odering.front_end.factories.order.OrderFactory;
 import com.system.odering.front_end.repositories.order.IOrderRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,13 @@ public class OrderRepositoryImpl extends SQLiteOpenHelper implements IOrderRepos
     public static final String COLUMN_NAME = "CUSTOMER";
     public static final String COLUMN_ADDRESS = "ADDRESS";
     public static final String COLUMN_FOODITEM = "FOODITEM";
+
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_NAME + " TEXT NOT NULL,"
+            + COLUMN_ADDRESS + " TEXT NOT NULL,"
+            + COLUMN_FOODITEM + " TEXT NOT NULL);";
 
     public OrderRepositoryImpl(Context context)
     {
@@ -93,7 +100,7 @@ public class OrderRepositoryImpl extends SQLiteOpenHelper implements IOrderRepos
         Long id = db.insertOrThrow(TABLE_NAME, null,values);
 
         Order newOrder = new Order.Builder()
-                .copy(order.getOrderID(), order)
+                .copy(order.getOrderID(), order.getCustomer(), order.getAddress(), order.getFoodItem())
                 .orderID(new Long(id))
                 .build();
 
@@ -171,7 +178,7 @@ public class OrderRepositoryImpl extends SQLiteOpenHelper implements IOrderRepos
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override

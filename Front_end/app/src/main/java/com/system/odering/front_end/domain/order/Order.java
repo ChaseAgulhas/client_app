@@ -72,12 +72,12 @@ public class Order implements Serializable, IOrder{
             return this;
         }
 
-        public Builder copy(Long orderID, Order value)
+        public Builder copy(Long orderID, Customer customer, Address address, FoodItem foodItem)
         {
             this.orderID = orderID;
-            this.customer = value.customer;
-            this.address = value.address;
-            this.foodItem = value.foodItem;
+            this.customer = customer;
+            this.address = address;
+            this.foodItem = foodItem;
 
             return this;
         }

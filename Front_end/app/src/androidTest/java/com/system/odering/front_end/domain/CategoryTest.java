@@ -14,7 +14,7 @@ public class CategoryTest extends AndroidTestCase{
     public void testCategory()
     {
         ICategory categoryTest = new Category.Builder()
-                .categoryID("123")
+                .categoryID(Long.valueOf("123"))
                 .categoryName("Vegetarian")
                 .build();
 

@@ -11,7 +11,7 @@ import android.util.Log;
 import com.system.odering.front_end.domain.address.Address;
 import com.system.odering.front_end.factories.address.AddressFactory;
 import com.system.odering.front_end.repositories.address.IAddressRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by cfebruary on 2016/12/13.
  */
 public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressRepository{
-    public static final String TABLE_NAME = "address";
+    public static final String TABLE_ADDRESS = "address";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "ID";
@@ -29,6 +29,16 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
     public static final String COLUMN_SUBURB = "SUBURB";
     public static final String COLUMN_CITY = "CITY";
     public static final String COLUMN_POSTCODE = "POSTCODE";
+
+    //Table creation
+    private static final String TABLE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_ADDRESS + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_STREETNUMBER + " TEXT NOT NULL,"
+            + COLUMN_STREETNAME + " TEXT NOT NULL,"
+            + COLUMN_SUBURB + " TEXT NOT NULL,"
+            + COLUMN_CITY + " TEXT NOT NULL,"
+            + COLUMN_POSTCODE + " TEXT NOT NULL);";
 
     public AddressRepositoryImpl(Context context)
     {
@@ -43,7 +53,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
     public Address findById(Long id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
-                TABLE_NAME,
+                TABLE_ADDRESS,
                 new String[]{
                         COLUMN_ID,
                         COLUMN_STREETNUMBER,
@@ -83,7 +93,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
         values.put(COLUMN_CITY, address.getCity());
         values.put(COLUMN_POSTCODE, address.getPostCode());
 
-        Long id = db.insertOrThrow(TABLE_NAME, null,values);
+        Long id = db.insertOrThrow(TABLE_ADDRESS, null,values);
 
         Address newAddress = new Address.Builder()
                 .copy(address)
@@ -107,7 +117,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
         values.put(COLUMN_POSTCODE, entity.getPostCode());
 
         db.update(
-                TABLE_NAME,
+                TABLE_ADDRESS,
                 values,
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf((entity.getId()))}
@@ -119,7 +129,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
     public Address delete(Address entity) {
         open();
         db.delete(
-                TABLE_NAME,
+                TABLE_ADDRESS,
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(entity.getId())});
         return entity;
@@ -130,7 +140,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
         SQLiteDatabase db = this.getReadableDatabase();
         Set<Address> addressSet = new HashSet<>();
         open();
-        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_ADDRESS, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 Long columnId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
@@ -152,14 +162,14 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
     @Override
     public int deleteAll() {
         open();
-        int rowsDeleted = db.delete(TABLE_NAME,null,null);
+        int rowsDeleted = db.delete(TABLE_ADDRESS,null,null);
         //close();
         return rowsDeleted;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(TABLE_CREATE);
     }
 
     @Override
@@ -167,7 +177,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
         Log.w(this.getClass().getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDRESS);
         onCreate(db);
     }
 }

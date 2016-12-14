@@ -11,7 +11,7 @@ import android.util.Log;
 import com.system.odering.front_end.domain.user.Customer;
 import com.system.odering.front_end.factories.user.CustomerFactory;
 import com.system.odering.front_end.repositories.user.ICustomerRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,15 @@ public class CustomerRepositoryImpl extends SQLiteOpenHelper implements ICustome
     public static final String COLUMN_SURNAME = "SURNAME";
     public static final String COLUMN_EMAIL = "EMAIL";
     public static final String COLUMN_PHONENUMBER = "PHONENUMBER";
+
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_NAME + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_NAME + " TEXT NOT NULL,"
+            + COLUMN_SURNAME + " TEXT NOT NULL,"
+            + COLUMN_EMAIL + " TEXT NOT NULL,"
+            + COLUMN_PHONENUMBER + " TEXT NOT NULL);";
 
     public CustomerRepositoryImpl(Context context)
     {
@@ -155,7 +164,7 @@ public class CustomerRepositoryImpl extends SQLiteOpenHelper implements ICustome
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override

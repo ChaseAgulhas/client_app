@@ -13,7 +13,7 @@ import com.system.odering.front_end.domain.order.FoodItem;
 import com.system.odering.front_end.domain.order.Menu;
 import com.system.odering.front_end.factories.order.MenuFactory;
 import com.system.odering.front_end.repositories.order.IMenuRepository;
-import com.system.odering.front_end.utils.DBConstants;
+import com.system.odering.front_end.utils.database.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,12 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_CATEGORYNAME = "CATEGORYNAME";
     public static final String COLUMN_FOODNAME = "FOODNAME";
+
+    //Database table creation
+    private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_CATEGORYNAME + " TEXT NOT NULL,"
+            + COLUMN_FOODNAME + " TEXT NOT NULL);";
 
     public MenuRepositoryImpl(Context context)
     {
@@ -158,7 +164,7 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Need to finish");
+        db.execSQL(DATABASE_CREATE);
     }
 
     @Override

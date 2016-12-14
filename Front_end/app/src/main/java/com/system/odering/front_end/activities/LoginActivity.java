@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             password = txt_login_password.getText().toString();
             User[] response = validateCredentials();
             if(response.length > 0){
-                Intent intent = new Intent(this, ProfileActivity.class);
+                Intent intent = new Intent(view.getContext(), FastFoodTabs.class);
                 intent.putExtra("userId", response[0].getEmail());
                 startActivity(intent);
             }else if(response.length == 0){

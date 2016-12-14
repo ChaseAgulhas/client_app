@@ -24,6 +24,8 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.EditPasswordActivity" />
         <activity android:name=".activities.EditHomeActivity" />
+        <activity android:name=".activities.FastFoodTabs"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

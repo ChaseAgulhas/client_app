@@ -143,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         ivImage.setImageBitmap(bm);
+
     }
 
     private void onCaptureImageResult(Intent data) {
@@ -162,9 +163,9 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(thumbnail != null) {
-            ivImage.setImageBitmap(thumbnail);
-        }
+
+        ivImage.setImageBitmap(thumbnail);
+
     }
 
     private class HttpRequestTask extends AsyncTask<Void, Void, User[]> {

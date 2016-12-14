@@ -47,6 +47,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
 
     public void open() throws SQLException{
         db = this.getWritableDatabase();
+        onCreate(db);
     }
 
     @Override
@@ -68,13 +69,14 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
                 null);
         if(cursor.moveToFirst())
         {
+            Long columnId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
             String streeNumber = cursor.getString(cursor.getColumnIndex(COLUMN_STREETNUMBER));
             String streeName = cursor.getString(cursor.getColumnIndex(COLUMN_STREETNAME));
             String suburb = cursor.getString(cursor.getColumnIndex(COLUMN_SUBURB));
             String city = cursor.getString(cursor.getColumnIndex(COLUMN_CITY));
             String postCode = cursor.getString(cursor.getColumnIndex(COLUMN_POSTCODE));
 
-            final Address address = AddressFactory.getInstance(streeNumber, streeName, suburb, city, postCode);
+            final Address address = AddressFactory.getInstance(id, streeNumber, streeName, suburb, city, postCode);
 
             return address;
         }
@@ -86,7 +88,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
     public Address save(Address address) {
         open();
         ContentValues values = new ContentValues();
-
+        values.put(COLUMN_ID, address.getId());
         values.put(COLUMN_STREETNUMBER, address.getStreetNumber());
         values.put(COLUMN_STREETNAME, address.getStreetName());
         values.put(COLUMN_SUBURB, address.getSuburb());
@@ -150,7 +152,7 @@ public class AddressRepositoryImpl extends SQLiteOpenHelper implements IAddressR
                 String city = cursor.getString(cursor.getColumnIndex(COLUMN_CITY));
                 String postCode = cursor.getString(cursor.getColumnIndex(COLUMN_POSTCODE));
 
-                final Address address = AddressFactory.getInstance(streetNumber, streetName, suburb, city, postCode);
+                final Address address = AddressFactory.getInstance(columnId, streetNumber, streetName, suburb, city, postCode);
 
                 addressSet.add(address);
             }

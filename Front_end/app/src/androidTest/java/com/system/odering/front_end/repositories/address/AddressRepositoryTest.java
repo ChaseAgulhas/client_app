@@ -22,6 +22,7 @@ public class AddressRepositoryTest extends AndroidTestCase {
 
         // CREATE
         Address address = new Address.Builder()
+                .id(Long.valueOf("1654"))
                 .streetNumber("123")
                 .streetName("Street name")
                 .suburb("Suburb")
@@ -44,7 +45,7 @@ public class AddressRepositoryTest extends AndroidTestCase {
 
         // UPDATE ENTITY
         Address updateEntity = new Address.Builder()
-                .copy(entity)
+                .copy(address)
                 .streetNumber("456")
                 .build();
         addressRepository.update(updateEntity);

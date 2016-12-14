@@ -3,6 +3,8 @@ package com.system.odering.front_end.repositories.order;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
+import com.system.odering.front_end.domain.order.Category;
+import com.system.odering.front_end.domain.order.FoodItem;
 import com.system.odering.front_end.domain.order.Menu;
 import com.system.odering.front_end.repositories.order.Impl.MenuRepositoryImpl;
 
@@ -21,8 +23,16 @@ public class MenuRepositoryTest extends AndroidTestCase {
         IMenuRepository menuRepository = new MenuRepositoryImpl(context);
 
         // CREATE
+        Category category = new Category.Builder()
+                .categoryName("Category")
+                .build();
+        FoodItem foodItem = new FoodItem.Builder()
+                .name("Food name")
+                .build();
         Menu menu = new Menu.Builder()
-                .id(Long.valueOf("1"))
+                .id(Long.valueOf("789"))
+                .category(category)
+                .foodItem(foodItem)
                 .build();
 
         Menu insertedEntity = menuRepository.save(menu);
@@ -30,8 +40,8 @@ public class MenuRepositoryTest extends AndroidTestCase {
         Assert.assertNotNull(insertedEntity);
 
         // READ ALL
-        Set<Menu> businessSet = menuRepository.findAll();
-        Assert.assertTrue(businessSet.size() > 0);
+        Set<Menu> menuSet = menuRepository.findAll();
+        Assert.assertTrue(menuSet.size() > 0);
 
 
         // READ ENTITY
@@ -40,12 +50,12 @@ public class MenuRepositoryTest extends AndroidTestCase {
 
         // UPDATE ENTITY
         Menu updateEntity = new Menu.Builder()
-                .copy(entity.getId(), entity.getCategory(), entity.getFoodItem())
-                .id(Long.valueOf("789"))
+                .copy(menu.getId(), menu.getCategory(), menu.getFoodItem())
+                .id(Long.valueOf("9874"))
                 .build();
         menuRepository.update(updateEntity);
         Menu newEntity = menuRepository.findById(id);
-        Assert.assertEquals("Lunch", newEntity.getCategory());
+        Assert.assertEquals("9874", newEntity.getId());
 
         // DELETE ENTITY
         menuRepository.delete(updateEntity);

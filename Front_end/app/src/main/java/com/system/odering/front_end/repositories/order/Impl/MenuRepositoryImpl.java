@@ -31,6 +31,7 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
 
     //Database table creation
     private static final String DATABASE_CREATE = " CREATE TABLE IF NOT EXISTS "
+            + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_CATEGORYNAME + " TEXT NOT NULL,"
             + COLUMN_FOODNAME + " TEXT NOT NULL);";
@@ -42,6 +43,7 @@ public class MenuRepositoryImpl extends SQLiteOpenHelper implements IMenuReposit
 
     public void open() throws SQLException {
         db = this.getWritableDatabase();
+        onCreate(db);
     }
 
     @Override

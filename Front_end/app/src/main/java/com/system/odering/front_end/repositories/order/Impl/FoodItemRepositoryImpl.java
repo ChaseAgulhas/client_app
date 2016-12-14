@@ -43,6 +43,7 @@ public class FoodItemRepositoryImpl extends SQLiteOpenHelper implements IFoodIte
 
     public void open() throws SQLException {
         db = this.getWritableDatabase();
+        onCreate(db);
     }
 
     @Override

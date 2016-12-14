@@ -1,14 +1,15 @@
-package com.system.odering.front_end.domain.order;
+package com.system.odering.front_end.domain.order.Impl;
 
-import com.system.odering.front_end.domain.address.Address;
-import com.system.odering.front_end.domain.user.Customer;
+import com.system.odering.front_end.domain.address.Impl.Address;
+import com.system.odering.front_end.domain.order.IOrder;
+import com.system.odering.front_end.domain.user.Impl.Customer;
 
 import java.io.Serializable;
 
 /**
  * Created by cfebruary on 2016/11/26.
  */
-public class Order implements Serializable, IOrder{
+public class Order implements Serializable, IOrder {
 
     private Long orderID;
     private Customer customer;

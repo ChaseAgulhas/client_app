@@ -1,6 +1,6 @@
 package com.system.odering.front_end.factories.user;
 
-import com.system.odering.front_end.domain.user.Login;
+import com.system.odering.front_end.domain.user.Impl.Login;
 
 /**
  * Created by cfebruary on 2016/12/10.

@@ -1,11 +1,13 @@
-package com.system.odering.front_end.domain.address;
+package com.system.odering.front_end.domain.address.Impl;
+
+import com.system.odering.front_end.domain.address.IAddress;
 
 import java.io.Serializable;
 
 /**
  * Created by cfebruary on 2016/09/25.
  */
-public class Address implements Serializable, IAddress{
+public class Address implements Serializable, IAddress {
 
     private Long id;
     private String streetNumber;

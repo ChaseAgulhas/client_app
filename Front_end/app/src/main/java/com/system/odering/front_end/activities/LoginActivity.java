@@ -33,20 +33,21 @@ public class LoginActivity extends AppCompatActivity {
 
         txt_login_email = (EditText)findViewById(R.id.txt_login_email);
         txt_login_password = (EditText)findViewById(R.id.txt_login_password);
-
     }
 
     public void actionLoginLogin(View view) {
-        if(txt_login_email.getText().equals("") || txt_login_password.getText().equals("")){
+        //Toast.makeText(this, ""+txt_login_email.getText(), Toast.LENGTH_SHORT).show();
+        if(txt_login_email.getText().equals("") && txt_login_password.getText().equals("")){
             Toast.makeText(this, "A name and password are required.", Toast.LENGTH_LONG).show();
         }else{
             email = txt_login_email.getText().toString();
             password = txt_login_password.getText().toString();
-            int response = validateCredentials();
-            if(response == 1){
-                //Intent intent = new Intent(this, ...class);
-                //startActivity(intent);
-            }else if(response == 2){
+            User[] response = validateCredentials();
+            if(response.length > 0){
+                Intent intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("userId", response[0].getEmail());
+                startActivity(intent);
+            }else if(response.length == 0){
                 Toast.makeText(this, "Incorrect password for this email.", Toast.LENGTH_LONG).show();
             }
             else{
@@ -70,8 +71,8 @@ public class LoginActivity extends AppCompatActivity {
     * will return 1, if user exists but password is incorrect
     * the method will return 2, if user does not exist will
     * return 3. */
-    public int validateCredentials(){
-        int response = 0;
+    public User[] validateCredentials(){
+        User[] response = new User[0];
         try {
             response = new HttpRequestTask().execute().get();
         } catch (InterruptedException e) {
@@ -82,10 +83,12 @@ public class LoginActivity extends AppCompatActivity {
         return response;
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Integer>{
+    private class HttpRequestTask extends AsyncTask<Void, Void, User[]>{
 
         @Override
-        protected Integer doInBackground(Void... params) {
+        protected User[] doInBackground(Void... params) {
+            User test = new User("test", "test", "test");
+            User[] userLogedIn = new User[1];
             try{
                 final String url = "http://0.0.0.0:8080/api/users/verify/{email}/{password}";
                 RestTemplate rest = new RestTemplate();
@@ -95,14 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                 map.put("password", password);
                 ResponseEntity<User> userResponseEntity = rest.postForEntity(url, null, User.class, map);
 
-                // if condition will determine the response
-                // based on the http response type (NOT_FOUND, OK, ...)
-                /*if(userResponseEntity.getStatusCode() == HttpStatus.OK){
-                    return 1;
-                }*/
+                return rest.getForObject(url, User[].class, map);
+
 
             }catch(HttpClientErrorException loginError){
-
                 /*if(loginError.getStatusCode() == HttpStatus.NOT_ACCEPTABLE)
                     return 2;
                 }else if(loginError.getStatusCode() == HttpStatus.NOT_FOUND){
@@ -114,7 +113,9 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("ERROR: OTHER - " + e);
             }
             //if other exception
-            return 1;
+            userLogedIn[0] = test;
+            userLogedIn[0].setCustId(234L);
+            return userLogedIn;
         }
     }
 }

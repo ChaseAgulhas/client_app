@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.system.odering.front_end.R;
+
 public class CheckoutTab extends Fragment {
 
     @Override

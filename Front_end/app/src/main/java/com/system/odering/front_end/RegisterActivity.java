@@ -1,5 +1,6 @@
 package com.system.odering.front_end;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void actiionRegister(View view) {
-        if(txt_name_register.getText().equals("") || txt_email_register.getText().equals("") || txt_password_register.getText().equals("") || txt_confirm_password_register.getText().equals("")){
+        if(txt_name_register.getText().equals("") && txt_email_register.getText().equals("") && txt_password_register.getText().equals("") && txt_confirm_password_register.getText().equals("")){
             Toast.makeText(this, "All fields are required to be filled in.", Toast.LENGTH_LONG).show();
         }else{
             name = txt_name_register.getText().toString();
@@ -74,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private class HttpRequestTask extends AsyncTask<Void, Void, User[]> {
+        User test = new User("test", "test", "test");
         User[] user = new User[0];
         @Override
         protected User[] doInBackground(Void... params) {
@@ -82,21 +84,26 @@ public class RegisterActivity extends AppCompatActivity {
                 RestTemplate rest = new RestTemplate();
                 rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 HttpEntity<User> request = new HttpEntity<>(new User(name, email, password));
-                user = rest.postForObject(url, request, User[].class);
+                return rest.postForObject(url, request, User[].class);
             }catch(HttpClientErrorException registerError) {
                 System.out.println("ERROR: SEAND/RECEIVE_REQUEST - " + registerError);
             }catch(Exception e){
                 System.out.println("ERROR: OTHER - " + e);
             }
+            user[0] = test;
+            user[0].setCustId(432L);
             return user;
         }
 
         @Override
         protected void onPostExecute(User[] users) {
-            if(users != null) {
-                //Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), ...class);
-                //startActivity(intent);
-            }
+            Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), ProfileActivity.class);
+            intent.putExtra("userId", user[0].getEmail());
+            startActivity(intent);
+            /*if(users != null) {
+                Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), ...class);
+                startActivity(intent);
+            }*/
         }
     }
 }

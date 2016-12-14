@@ -11,4 +11,18 @@
     <string name="password_register_input">Password</string>
     <string name="confirm_password_register_input">Confirm password</string>
     <string name="register_button_register">Register</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="edit_home_location">Edit Home Location</string>
+    <string name="edit_email_address">Edit Email Address</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="save_email">Save</string>
+    <string name="edit_email_address_heading">Edit Email Address</string>
+    <string name="new_email_address">New Email Address...</string>
+    <string name="save_password">Save</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="edit_home_location_heading">Edit Home Location</string>
+    <string name="city">City</string>
+    <string name="street_address">Street Address</string>
+    <string name="suburb">Suburb</string>
+    <string name="save_home_location">Save</string>
 </resources>

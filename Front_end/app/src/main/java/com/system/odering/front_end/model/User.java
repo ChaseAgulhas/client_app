@@ -5,6 +5,7 @@ package com.system.odering.front_end.model;
  */
 
 public class User {
+    private long custId;
     private String name;
     private String email;
     private String password;
@@ -17,6 +18,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public long getCustId() {
+        return custId;
+    }
+
+    public void setCustId(long custId) {
+        this.custId = custId;
     }
 
     public String getName() {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.system.odering.front_end.EditHomeActivity">
+
+    <TextView
+        android:text="@string/edit_home_location_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:id="@+id/lblEditHome"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/txtLine1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtLine2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/txtSuburb"
+        android:layout_alignLeft="@+id/lblEditHome"
+        android:layout_alignStart="@+id/lblEditHome"
+        android:layout_marginTop="30dp"
+        android:id="@+id/txtCity"
+        android:hint="@string/city" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="41dp"
+        android:id="@+id/txtLine1"
+        android:hint="@string/street_address"
+        android:layout_below="@+id/lblEditHome"
+        android:layout_alignLeft="@+id/txtLine2"
+        android:layout_alignStart="@+id/txtLine2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="33dp"
+        android:id="@+id/txtSuburb"
+        android:layout_below="@+id/txtLine2"
+        android:layout_alignLeft="@+id/txtLine2"
+        android:layout_alignStart="@+id/txtLine2"
+        android:hint="@string/suburb" />
+
+    <Button
+        android:text="@string/save_home_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:id="@+id/btnSaveHome"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:onClick="saveHomeLocation"/>
+</RelativeLayout>

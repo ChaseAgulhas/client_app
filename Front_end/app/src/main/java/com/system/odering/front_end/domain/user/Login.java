@@ -6,15 +6,17 @@ import java.io.Serializable;
  * Created by cfebruary on 2016/09/29.
  */
 public class Login implements Serializable, ILogin{
+    private Long id;
     private String username;
     private String password;
 
     private Login(Builder builder)
     {
+        this.id = builder.id;
         this.username = builder.username;
         this.password = builder.password;
     }
-
+    public Long getId(){return id;}
     public String getUsername(){return username;}
     public String getPassword(){return password;}
 
@@ -26,10 +28,17 @@ public class Login implements Serializable, ILogin{
 
     public static class Builder
     {
+        private Long id;
         private String username;
         private String password;
 
         public Builder(){}
+
+        public Builder id(Long id)
+        {
+            this.id = id;
+            return this;
+        }
 
         public Builder username(String username)
         {
@@ -45,8 +54,9 @@ public class Login implements Serializable, ILogin{
 
         public Builder copy(Login login)
         {
-            this.username = login.getUsername();
-            this.password = login.getPassword();
+            this.id = login.id;
+            this.username = login.username;
+            this.password = login.password;
             return this;
         }
 

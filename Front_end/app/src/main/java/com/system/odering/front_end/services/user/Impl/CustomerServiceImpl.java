@@ -14,11 +14,11 @@ import com.system.odering.front_end.services.user.ICustomerService;
  * Created by cfebruary on 2016/12/14.
  */
 public class CustomerServiceImpl extends IntentService implements ICustomerService {
-    private static final String ACTION_ADD = "com.system.odering.front_end.services.order.Impl.action.ADD";
-    private static final String ACTION_UPDATE = "com.system.odering.front_end.services.order.Impl.action.UPDATE";
+    private static final String ACTION_ADD = "com.system.odering.front_end.services.user.Impl.action.ADD";
+    private static final String ACTION_UPDATE = "com.system.odering.front_end.services.user.Impl.action.UPDATE";
 
-    private static final String EXTRA_ADD = "com.system.odering.front_end.services.order.Impl.extra.ADD";
-    private static final String EXTRA_UPDATE = "com.system.odering.front_end.services.order.Impl.extra.UPDATE";
+    private static final String EXTRA_ADD = "com.system.odering.front_end.services.user.Impl.extra.ADD";
+    private static final String EXTRA_UPDATE = "com.system.odering.front_end.services.user.Impl.extra.UPDATE";
 
     private static CustomerServiceImpl service = null;
 

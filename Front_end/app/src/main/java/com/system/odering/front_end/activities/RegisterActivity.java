@@ -1,4 +1,4 @@
-package com.system.odering.front_end;
+package com.system.odering.front_end.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.system.odering.front_end.R;
 import com.system.odering.front_end.model.User;
 
 import org.springframework.http.HttpEntity;

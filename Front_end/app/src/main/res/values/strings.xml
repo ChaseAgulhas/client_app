@@ -11,6 +11,7 @@
     <string name="password_register_input">Password</string>
     <string name="confirm_password_register_input">Confirm password</string>
     <string name="register_button_register">Register</string>
+<<<<<<< HEAD
     <string name="customer_name">Customer Name</string>
     <string name="edit_home_location">Edit Home Location</string>
     <string name="edit_email_address">Edit Email Address</string>
@@ -25,4 +26,22 @@
     <string name="street_address">Street Address</string>
     <string name="suburb">Suburb</string>
     <string name="save_home_location">Save</string>
+=======
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_maps">Map</string>
+>>>>>>> 93913763b6fc1c7d6c8e6b0f6de6a8f2f0e8ccd8
 </resources>

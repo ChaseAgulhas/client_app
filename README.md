@@ -3,7 +3,7 @@
 
 ### What is this repository for? ###
 
-* Our application aims to provide a simple solution for all fast food companies to advertise their products to anybody with a smartphone and facilitate with placing orders online. We also provide the company with a desktop application which they can use to manage their business and employees more effectively.
+* Our applications aim to provide a simple solution for all fast food companies to advertise their products to anybody with a smartphone and facilitate with placing orders online. We also provide the company with a desktop application which they can use to manage their business and employees more effectively.
 * Version 1
 
 ### How do I get set up? ###

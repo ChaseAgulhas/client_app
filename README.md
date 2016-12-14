@@ -1,4 +1,4 @@
-![Fast food.png](https://bitbucket.org/repo/LGxGp5/images/2242295874-Fast%20food.png)# README #
+![Fast food.png](https://bitbucket.org/repo/LGxGp5/images/2242295874-Fast%20food.png)
 
 
 ### What is this repository for? ###

@@ -1,3 +1,7 @@
+###NOTE:###
+Most of the code that was committed by Chad has been removed due to it being unnecessary code. It did not at all fit into the functionality of our mobile app as we do not need repositories on the front-end, as we have a back-end to store all data. therefore the commits in the commit log of the Client_app do not truly reflect the contribution of the app's overall functionality.
+
+
 ![Fast food.png](https://bitbucket.org/repo/LGxGp5/images/2242295874-Fast%20food.png)
 
 

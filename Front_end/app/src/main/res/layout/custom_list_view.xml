@@ -82,12 +82,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableLeft="@android:drawable/ic_input_add"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/custom_list_view_product_price_value"
-        android:layout_toEndOf="@+id/custom_list_view_product_price_value" />
+        android:layout_toRightOf="@+id/custom_list_view_product_price_value" />
 
+    <!--android:layout_marginLeft="13dp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/custom_list_view_product_price_value"-->
 </RelativeLayout>

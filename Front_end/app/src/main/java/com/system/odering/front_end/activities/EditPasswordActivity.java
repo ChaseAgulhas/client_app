@@ -75,7 +75,7 @@ public class EditPasswordActivity extends AppCompatActivity {
         @Override
         protected User[] doInBackground(Void... params) {
             try{
-                final String url = "http://0.0.0.0:8080/api/users";
+                final String url = "http://0.0.0.0:8080/api/users/editPassword";
                 RestTemplate rest = new RestTemplate();
                 rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 HashMap<String, String> map = new HashMap<>();

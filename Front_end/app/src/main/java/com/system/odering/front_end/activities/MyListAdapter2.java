@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -77,6 +76,8 @@ public class MyListAdapter2 extends ArrayAdapter<UserFoodItem> {
             }
         });
 
+
+
         //Set up the spinner item
         final ArrayAdapter<String> qtyAdapter = new ArrayAdapter<String>(getContext(),R.layout.qty_spinner, qtyValues);
         qtyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,6 +116,8 @@ public class MyListAdapter2 extends ArrayAdapter<UserFoodItem> {
             }
         });
         notifyDataSetChanged();
+
+
         return  convertView;
     }
     //here is where we will create the HTTPRequst to send singe food items to the Cart table in the DB

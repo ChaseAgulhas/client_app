@@ -80,7 +80,7 @@ public class EditHomeActivity extends AppCompatActivity {
         @Override
         protected Address[] doInBackground(Void... params) {
             try{
-                final String url = "http://0.0.0.0:8080/api/users";
+                final String url = "http://0.0.0.0:8080/api/users/editAddress";
                 RestTemplate rest = new RestTemplate();
                 rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 HttpEntity<Address> request = new HttpEntity<>(new Address(userId, number, line1+", "+line2, suburb, city));

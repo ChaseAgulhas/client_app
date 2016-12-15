@@ -4,25 +4,19 @@ package com.system.odering.front_end.activities;
  * Created by Chase Agulhas on 2016/11/21.
  */
 
-import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.system.odering.front_end.R;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class CartTab extends Fragment {
 
@@ -36,6 +30,10 @@ public class CartTab extends Fragment {
     //TextView empty;
     //Data Pulled from the server into an arraylist
     ArrayList<UserFoodItem> productResullts;
+
+    private static ArrayList<UserFoodItem> orderItems;
+    Button checkout;
+
 
     //Based on the search string certain filtered resuts will be displayed
     //ArrayList<String> filteredProductResults = new ArrayList<String>();
@@ -56,6 +54,17 @@ public class CartTab extends Fragment {
 
         //searchResults.setEmptyView(empty);
         searchResults.setAdapter(myListAdapter);
+
+        Button checkout = (Button)rootView.findViewById(R.id.checkout);
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CheckoutActivity.class);
+                String userId = ((FastFoodTabs)getContext()).getLoggedInUser();
+                intent.putExtra("userId", userId);
+                getContext().startActivity(intent);
+            }
+        });
 
         return rootView;
     }
@@ -85,6 +94,8 @@ public class CartTab extends Fragment {
             FoodItem foodItem = productResullts.get(i).getProduct();
             productResullts.add(new UserFoodItem(foodItem, foodItem.getPrice(), 1));
         }
+
+        orderItems = productResullts;
     }
 
     public ArrayList<UserFoodItem> getListResults() {
@@ -92,7 +103,7 @@ public class CartTab extends Fragment {
     }
 
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, UserFoodItem[]> {
+    /*private class HttpRequestTask extends AsyncTask<Void, Void, UserFoodItem[]> {
 
         UserFoodItem[] response = new UserFoodItem[100];
 
@@ -124,7 +135,11 @@ public class CartTab extends Fragment {
             }
             return response;
         }
-    }
+    }*/
 
+
+    public static ArrayList<UserFoodItem> getOrderItems(){
+        return orderItems;
+    }
 }
 

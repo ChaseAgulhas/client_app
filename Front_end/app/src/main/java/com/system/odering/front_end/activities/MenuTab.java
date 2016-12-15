@@ -3,31 +3,22 @@ package com.system.odering.front_end.activities;
 /**
  * Created by Chase Agulhas on 2016/11/21.
  */
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.system.odering.front_end.R;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MenuTab extends Fragment {
@@ -83,7 +74,7 @@ public class MenuTab extends Fragment {
         @Override
         protected FoodItem[] doInBackground(Void... params) {
             try{
-                final String url = "http://localhost:8080/api/users/verify/{username}/{password}";
+                final String url = "http://localhost:8080/api/fooditem/getAll";
                 RestTemplate rest = new RestTemplate();
                 rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 FoodItem[] fooditems = rest.getForObject(url, FoodItem[].class);

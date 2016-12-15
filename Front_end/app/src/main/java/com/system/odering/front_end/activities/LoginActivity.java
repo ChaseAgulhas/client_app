@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected User[] doInBackground(Void... params) {
-            User test = new User("test", "test", "test");
+            User test = new User("test", "testuser@gmail.com", "test");
             User[] userLogedIn = new User[1];
             try{
                 final String url = "http://0.0.0.0:8080/api/users/verify/{email}/{password}";

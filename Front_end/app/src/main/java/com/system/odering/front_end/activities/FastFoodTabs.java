@@ -30,7 +30,7 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
 
 
     private ArrayList<UserFoodItem> userFoodItems;
-    private String loggedInUser;
+    public String loggedInUser;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -42,7 +42,7 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
         setContentView(R.layout.activity_fast_food_tabs);
 
         userFoodItems = new ArrayList<UserFoodItem>();
-        loggedInUser = getIntent().getStringExtra("email");
+        loggedInUser = getIntent().getStringExtra("userId");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,7 +88,6 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,8 +162,6 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
                     return new MenuTab();
                 case 1:
                     return new CartTab();
-                case 2:
-                    return new CheckoutTab();
                 default:
                     return null;
             }
@@ -173,7 +170,7 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -183,8 +180,6 @@ public class FastFoodTabs extends AppCompatActivity implements Communicator  {
                     return "Menu";
                 case 1:
                     return "Cart";
-                case 2:
-                    return "Checkout";
             }
             return null;
         }

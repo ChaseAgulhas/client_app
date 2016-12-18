@@ -1,6 +1,7 @@
 package com.system.odering.front_end.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.system.odering.front_end.R;
 import com.system.odering.front_end.model.User;
 
+import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
@@ -19,6 +21,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
             password = txt_password_register.getText().toString();
             if(validateEmail(email)) {
                 if (validatePassword(password)) {
-                    if (password.equals(txt_confirm_password_register.getText())) {
-                        new HttpRequestTask().execute();
+                    if (password.equals(txt_confirm_password_register.getText().toString())) {
+                        new HttpRequestTask(name, email, password).execute();
                     } else {
                         Toast.makeText(this, "Password must match.", Toast.LENGTH_LONG).show();
                     }
@@ -75,36 +83,75 @@ public class RegisterActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, User[]> {
-        User test = new User("test", "test", "test");
-        User[] user = new User[0];
-        @Override
-        protected User[] doInBackground(Void... params) {
-            try{
-                final String url = "http://0.0.0.0:8080/api/users";
-                RestTemplate rest = new RestTemplate();
-                rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                HttpEntity<User> request = new HttpEntity<>(new User(name, email, password));
-                return rest.postForObject(url, request, User[].class);
-            }catch(HttpClientErrorException registerError) {
-                System.out.println("ERROR: SEAND/RECEIVE_REQUEST - " + registerError);
-            }catch(Exception e){
-                System.out.println("ERROR: OTHER - " + e);
-            }
-            user[0] = test;
-            user[0].setCustId(432L);
-            return user;
-        }
+   private class HttpRequestTask extends AsyncTask<Void, Void, User[]>{
 
-        @Override
-        protected void onPostExecute(User[] users) {
-            Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), ProfileActivity.class);
-            intent.putExtra("userId", user[0].getEmail());
-            startActivity(intent);
+       private String name;
+       private String email;
+       private String password;
+
+       public HttpRequestTask(String name, String email, String password) {
+           this.name = name;
+           this.email = email;
+           this.password = password;
+       }
+
+       @Override
+       protected User[] doInBackground(Void... params) {
+           User test = new User("test", "testuser@gmail.com", "test");
+           User[] userLogedIn = new User[1];
+
+
+           try{
+
+               OkHttpClient client = new OkHttpClient();
+
+               MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
+               RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n"+name+"\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n"+email+"\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n"+password+"\r\n-----011000010111000001101001--");
+               Request request = new Request.Builder()
+                       .url("http://192.168.10.107:8000/api/user/signup")
+                       .post(body)
+                       .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+                       .addHeader("cache-control", "no-cache")
+                       .build();
+
+               Response response = client.newCall(request).execute();
+
+               JSONObject json = new JSONObject(response.body().string().toString());
+
+               SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+               SharedPreferences.Editor editor = pref.edit();
+
+               editor.putString("token", json.get("token").toString());
+               editor.commit();
+
+           }catch(HttpClientErrorException loginError){
+                /*if(loginError.getStatusCode() == HttpStatus.NOT_ACCEPTABLE)
+                    return 2;
+                }else if(loginError.getStatusCode() == HttpStatus.NOT_FOUND){
+                    return 3;
+                }*/
+
+               System.out.println("ERROR: SEND/RECEIVE_REQUEST - " + loginError);
+           }catch(Exception e){
+               System.out.println("ERROR: OTHER - " + e);
+           }
+           //if other exception
+           userLogedIn[0] = test;
+           userLogedIn[0].setCustId(234L);
+           return userLogedIn;
+       }
+
+       @Override
+       protected void onPostExecute(User[] users) {
+           Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), LoginActivity.class);
+           intent.putExtra("userId", email);
+           startActivity(intent);
             /*if(users != null) {
-                Intent intent = new Intent(RegisterActivity.this.getApplicationContext(), ...class);
+                intent = new Intent(RegisterActivity.this.getApplicationContext(), MenuTab.class);
                 startActivity(intent);
             }*/
-        }
-    }
+       }
+   }
 }
+
+
